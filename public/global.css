@@ -64,3 +64,10 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+input,
+textarea {
+	background-color: #505050;
+    border-color: #909090;
+    color: white;
+}

@@ -33,13 +33,25 @@
 	.name {
 		width: 100%;
 	}
+
+	.description-wrapper {
+		margin-top: 10px;
+	}
+
+	.description {
+		width: 100%;
+		padding: 6px;
+	}
 </style>
 
 <div class="task">
 	<div class="columns">
-		<div class="column">
+		<div class="column is-three-quarters">
 			<div class="name-wrapper">
 				<input bind:this={nameElement} class="name" bind:value={task.name} />
+			</div>
+			<div class="description-wrapper">
+				<textarea class="description" rows="4" bind:value={task.description} />
 			</div>
 		</div>
 		<div class="column">
