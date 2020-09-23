@@ -42,8 +42,7 @@
 		});
 
 		if (totalDuration) {
-			var dt = DateTime.fromMillis(totalDuration.milliseconds)
-			duration = dt.toFormat("HH:mm");
+			duration = totalDuration.toFormat("hh:mm")
 		}
 	}
 </script>
