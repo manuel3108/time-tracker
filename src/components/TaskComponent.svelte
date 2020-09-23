@@ -5,22 +5,46 @@
 	import Task from "../scripts/Task";
 	import { tasks } from "../stores/tasks";
 	import { onMount } from "svelte";
+	import { DateTime, Duration } from 'luxon'
 
 	export let task: Task;
 	export let focus: boolean;
 
 	let nameElement: HTMLInputElement;
+	let duration: string = "0";
 
 	onMount(() => {
 		if(focus) {
 			nameElement.focus();
 		}
+
+		calcDuration();
 	});
 
 	function addTimeSpan() {
 		let ts = TimeSpan.fromNow();
 		task.timespans.push(ts);
 		$tasks = $tasks;
+
+		calcDuration();
+	}
+	
+	function calcDuration() {
+		let totalDuration = Duration.fromMillis(0);
+
+		task.timespans.forEach(ts => {
+			if(ts.from !== "" && ts.to !== "") {
+				var from = DateTime.fromFormat(ts.from, "HH:mm");
+				var to = DateTime.fromFormat(ts.to, "HH:mm");
+				let d = to.diff(from);
+				totalDuration = totalDuration.plus(d);
+			}
+		});
+
+		if (totalDuration) {
+			var dt = DateTime.fromMillis(totalDuration.milliseconds)
+			duration = dt.toFormat("HH:mm");
+		}
 	}
 </script>
 
@@ -28,6 +52,7 @@
 	.task {
 		border: 1px solid #505050;
 		padding: 10px;
+		margin: 10px;
 	}
 
 	.name {
@@ -55,9 +80,12 @@
 			</div>
 		</div>
 		<div class="column">
+			<div class="duration">
+				<span>duration: {duration}</span>
+			</div>
 			<div class="times">
 				{#each task.timespans as timespan}
-					<TimeSpanComponent bind:from={timespan.from} bind:to={timespan.to}></TimeSpanComponent>					
+					<TimeSpanComponent bind:from={timespan.from} bind:to={timespan.to} on:change="{calcDuration}"></TimeSpanComponent>					
 				{/each}
 			</div>
 			<div class="add-time">
