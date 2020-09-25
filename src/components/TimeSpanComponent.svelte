@@ -15,10 +15,12 @@
 
 	function fromNow() {
 		from = nowAsString();
+		inputChanged();
 	}
 
 	function toNow() {
 		to = nowAsString();
+		inputChanged();
 	}
 
 	function inputChanged() {
