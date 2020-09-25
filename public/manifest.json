@@ -1,0 +1,8 @@
+{
+  "name": "Time Tracker",
+  "theme_color": "#1f2424",
+  "background_color": "#1f2424",
+  "display": "fullscreen",
+  "scope": "/",
+  "start_url": "/"
+}
