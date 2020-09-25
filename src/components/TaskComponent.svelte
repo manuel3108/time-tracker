@@ -70,7 +70,7 @@
 
 <div class="task">
 	<div class="columns">
-		<div class="column is-three-quarters">
+		<div class="column is-two-thirds">
 			<div class="name-wrapper">
 				<input bind:this={nameElement} class="name" bind:value={task.name} />
 			</div>
